@@ -1,0 +1,27 @@
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metatdata:
+  name: devops-paradox
+  namespaces: argocd
+  finalizers:
+    - resource-finalizer.argocd.argoproj.io
+spec:
+  project: default
+  source:
+    path: helm
+    repoURL: https://github.com/home-education-companion/devops-paradox
+    targetRevision: HEAD
+    helm:
+      values: |
+        image:
+          tag: latest
+        ingress:
+          host: devops-paradox.82.6.143.106.xip.io
+      version: v3
+  destination:
+    namespace: production
+    server: https://kubernetes.default.svc
+  syncPolicy:
+    automated: 
+      selfHeal: true
+      prune: true

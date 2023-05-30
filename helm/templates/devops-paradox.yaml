@@ -1,10 +1,10 @@
 apiVersion: argoproj.io/v1alpha1
 kind: Application
-metatdata:
+metadata:
   name: devops-paradox
-  namespaces: argocd
+  namespace: argocd
   finalizers:
-    - resource-finalizer.argocd.argoproj.io
+    - resources-finalizer.argocd.argoproj.io
 spec:
   project: default
   source:
